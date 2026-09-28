@@ -1,0 +1,28 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Haalt de bestanden uit de GitHub repository op
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Logt in bij DockerHub met de GitHub secrets
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Bouwt het Docker image en pusht deze naar DockerHub
+      - name: Build and push Docker image
+        run: |
+          docker build -t borayazir/container:latest .
+          docker push borayazir/container:latest
