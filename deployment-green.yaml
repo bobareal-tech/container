@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: green-deployment
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: webapp
+      version: green
+
+  template:
+    metadata:
+      labels:
+        app: webapp
+        version: green
+
+    spec:
+      containers:
+        - name: web-app
+          image: europe-west2-docker.pkg.dev/tokyo-analyst-480722-h5/week3-images/green:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
