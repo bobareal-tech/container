@@ -42,10 +42,10 @@ jobs:
           docker push $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:latest
 
       - name: Get GKE credentials
-        run: |
-          gcloud container clusters get-credentials $GKE_CLUSTER \
-            --region $GKE_LOCATION \
-            --project $PROJECT_ID
+        uses: google-github-actions/get-gke-credentials@v3
+        with:
+          cluster_name: ${{ env.GKE_CLUSTER }}
+          location: ${{ env.GKE_LOCATION }}
 
       - name: Deploy Green
         run: |
