@@ -9,7 +9,7 @@ spec:
 
   selector:
     app: webapp
-    version: blue
+    version: green
 
   ports:
     - port: 80
